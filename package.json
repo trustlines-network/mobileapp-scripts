@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "generate": "babel-node "
+  },
+  "dependencies": {
+    "command-line-args": "^5.1.1",
+    "command-line-usage": "^6.1.0",
+    "esm": "^3.2.25",
+    "node-fetch": "^2.6.0",
+    "trustlines-clientlib": "^0.11.0"
+  }
+}
