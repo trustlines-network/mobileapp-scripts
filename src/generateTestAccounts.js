@@ -161,8 +161,13 @@ async function generateRandomPaymentsBetweenAddresses(networkAddress, tl1, tl2) 
  * @returns {Promise<void>}
  */
 async function pay(networkAddress, instance, address, amount) {
-    const payment = await instance.payment.prepare(networkAddress, address, amount)
-    await instance.payment.confirm(payment.rawTx)
+    try {
+        const payment = await instance.payment.prepare(networkAddress, address, amount)
+        await instance.payment.confirm(payment.rawTx)
+    } catch (e) {
+        console.log("couldn't make a payment:" + e.message)
+    }
+
 }
 
 /**
@@ -190,6 +195,7 @@ async function init() {
 
     // generate 200 random paymens between the 2 accounts
     for (let i = 0; i < options.paymentsCount; i++) {
+        console.log('payment number', i+1)
         await generateRandomPaymentsBetweenAddresses(currencyNetworkAddress, tlInstances[0], tlInstances[1], 2, 1)
     }
 
