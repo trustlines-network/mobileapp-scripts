@@ -14,7 +14,20 @@ we need to run them through the esm loader.
 ## Config
 Rename the `config.dist.js` file into `config.js` and specify the correct parameters to connect to your relay server
 
+### Firebase Admin
+Some of the scripts use the firebase-admin sdk. For those scripts to work one needs a service account file
+and the `GOOGLE_APPLICATION_CREDENTIALS` environment variable needs to point to this file.
+
+**To set the environment variable** 
+
+Set the environment variable GOOGLE_APPLICATION_CREDENTIALS to the file path of the JSON file that contains your service account key. This variable only applies to your current shell session, so if you open a new session, set the variable again.
+```
+export GOOGLE_APPLICATION_CREDENTIALS="/home/user/Downloads/service-account-file.json"
+```
+
 ## Available scripts
 To see usage information call every script with the -h flag
 
- - *generateTestAccoounts* - this script generates 2 test accounts, a trustline between them and payments between them.
+ - **generateTestAccounts** - this script generates 2 test accounts, a trustline between them and payments between them.
+ - **notifications** - sends a firebase cloud message to the specified device token.
+
