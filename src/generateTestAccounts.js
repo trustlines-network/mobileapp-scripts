@@ -2,7 +2,6 @@
  * This script generates: accounts, trustlines and transactions between the accounts
  */
 
-import {TLNetwork} from "trustlines-clientlib"
 import fetch from 'node-fetch'
 import fs from "fs"
 import commandLineArgs from 'command-line-args'
@@ -12,7 +11,7 @@ import commandLineUsage from 'command-line-usage'
 global.fetch = fetch;
 global.Headers = fetch.Headers;
 
-import {config} from "../config";
+import {createAndLoadUsers, generateTlIntances, setTrustlines} from "./utils";
 
 
 const optionDefinitions = [
@@ -56,81 +55,6 @@ const sections = [
 ]
 const usage = commandLineUsage(sections)
 
-
-/**
- * Generate the specified number of TLNetwork instances
- *
- * @param instances
- * @returns {[]}
- */
-function generateTlIntances(instances = 2) {
-    const initialized = []
-    for (let i = 0; i < instances; i++) {
-        // @ts-ignore
-        const instance = new TLNetwork(config)
-        initialized.push(instance)
-    }
-
-    return initialized
-}
-
-/**
- * Create users for the passed array of instances and deploy their identities
- *
- * @param tlInstances
- * @returns {Promise<[(number | bigint), (number | bigint), (number | bigint), (number | bigint), (number | bigint), (number | bigint), (number | bigint), (number | bigint), (number | bigint), (number | bigint)]>}
- */
-export async function createAndLoadUsers(tlInstances) {
-    return Promise.all(
-        tlInstances.map(async tl => {
-            const walletData = await tl.user.create()
-
-            await tl.user.loadFrom(walletData)
-            try {
-                await tl.user.deployIdentity()
-            } catch (e) {
-                console.log('couldnt deploy identity', e)
-            }
-
-
-            return walletData
-        })
-    )
-}
-
-/**
- * Create a trustline between 2 instances
- *
- * @param networkAddress
- * @param tl1
- * @param tl2
- * @param given
- * @param received
- * @returns {Promise<void>}
- */
-export async function setTrustlines(networkAddress, tl1, tl2, given, received) {
-    const [tx1, tx2] = await Promise.all([
-        tl1.trustline.prepareUpdate(
-            networkAddress,
-            tl2.user.address,
-            given,
-            received
-        ),
-        tl2.trustline.prepareUpdate(
-            networkAddress,
-            tl1.user.address,
-            received,
-            given
-        )
-    ])
-
-    await Promise.all([
-        tl1.trustline.confirm(tx1.rawTx),
-        tl2.trustline.confirm(tx2.rawTx)
-    ])
-    await wait()
-    return
-}
 
 /**
  * Generate random transfers between 2 addresses
@@ -192,7 +116,7 @@ async function init() {
     const users = await createAndLoadUsers(tlInstances)
 
     await setTrustlines(currencyNetworkAddress, tlInstances[0], tlInstances[1], 1000, 1000)
-
+    await wait(5000)
     // generate 200 random paymens between the 2 accounts
     for (let i = 0; i < options.paymentsCount; i++) {
         console.log('payment number', i+1)
