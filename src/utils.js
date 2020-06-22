@@ -1,5 +1,6 @@
 import {TLNetwork} from "trustlines-clientlib";
 import {config} from "../config";
+import fs from "fs";
 
 /**
  * Generate the specified number of TLNetwork instances
@@ -68,12 +69,10 @@ export async function setTrustlines(networkAddress, tl1, tl2, given, received) {
         )
     ])
 
-    await Promise.all([
+    return Promise.all([
         tl1.trustline.confirm(tx1.rawTx),
         tl2.trustline.confirm(tx2.rawTx)
     ])
-
-    return
 }
 
 
@@ -85,4 +84,18 @@ export async function setTrustlines(networkAddress, tl1, tl2, given, received) {
  */
 export function wait(ms = 2000) {
     return new Promise(resolve => setTimeout(() => resolve(), ms))
+}
+
+
+export function storeCredentials(users) {
+    const accounts = users.map((user) => {
+        return `${user.address} | ${user.meta.signingKey.mnemonic} | ${user.meta.signingKey.privateKey}`
+    }).reduce((prev, curr) => {
+        return prev + "\n" + curr
+    }, "")
+
+    fs.appendFile('accounts.txt', accounts, function (err) {
+        if (err) throw err;
+        console.log('Accounts credentials saved to accounts.txt!');
+    });
 }

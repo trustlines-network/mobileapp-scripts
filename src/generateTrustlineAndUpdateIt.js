@@ -1,13 +1,10 @@
 /**
- * This script generates: accounts, trustlines and transactions between the accounts
- */
+ * This script generates: accounts, trustlines and transactions between the accounts*/
 
-import {TLNetwork} from "trustlines-clientlib"
 import fetch from 'node-fetch'
-import fs from "fs"
 import commandLineArgs from 'command-line-args'
 import commandLineUsage from 'command-line-usage'
-import {createAndLoadUsers, generateTlIntances, setTrustlines, wait} from "./utils";
+import {createAndLoadUsers, generateTlIntances, setTrustlines, storeCredentials, wait} from "./utils";
 // Do some magic for dependencies that are not available in node
 global.fetch = fetch;
 global.Headers = fetch.Headers;
@@ -81,13 +78,16 @@ async function init() {
     const tlInstances = generateTlIntances(2)
     const users = await createAndLoadUsers(tlInstances)
 
+    storeCredentials(users)
+
     console.log('user1 address', users[1].address)
 
     for (let i = 1; i < options.count; i++) {
-        await setTrustlines(currencyNetworkAddress, tlInstances[0], tlInstances[1], i, i)
-        await wait(750)
+        const trustlines = await setTrustlines(currencyNetworkAddress, tlInstances[0], tlInstances[1], i, i)
+        await wait(7000)
 
-        // console.log(tlInstances[0])
+        console.log("::::", new Date().toUTCString())
+        console.log("transaction hashes: ", trustlines[0], trustlines[0])
         const expectEqual = await expectTrustlinesToEqualTo(currencyNetworkAddress, tlInstances[0], tlInstances[1].user.address, i, i)
 
         if(!expectEqual) {
@@ -96,16 +96,7 @@ async function init() {
         }
     }
 
-         const accounts = users.map((user) => {
-             return `${user.address} | ${user.meta.signingKey.mnemonic} | ${user.meta.signingKey.privateKey}`
-         }).reduce((prev, curr) => {
-             return prev + "\n" + curr
-         }, "")
 
-    fs.appendFile('accounts.txt', accounts, function (err) {
-        if (err) throw err;
-        console.log('Accounts credentials saved to accounts.txt!');
-    });
 }
 
 if (options.help) {
