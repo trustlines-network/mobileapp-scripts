@@ -87,7 +87,7 @@ async function init() {
         await wait(7000)
 
         console.log("::::", new Date().toUTCString())
-        console.log("transaction hashes: ", trustlines[0], trustlines[0])
+        console.log("transaction hashes: ", trustlines[0], trustlines[1])
         const expectEqual = await expectTrustlinesToEqualTo(currencyNetworkAddress, tlInstances[0], tlInstances[1].user.address, i, i)
 
         if(!expectEqual) {
