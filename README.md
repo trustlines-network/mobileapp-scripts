@@ -30,4 +30,5 @@ To see usage information call every script with the -h flag
 
  - **generateTestAccounts** - this script generates 2 test accounts, a trustline between them and payments between them.
  - **notifications** - sends a firebase cloud message to the specified device token.
+ - **translateCurrency** - Generate currency translations from the provided template in the specified language. Use the translateCurrencyTemplate.dist as a starting point for the template file structure.
 

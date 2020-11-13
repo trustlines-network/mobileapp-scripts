@@ -1,0 +1,6 @@
+Währung: ${currency_name}
+Währungsraum: ${country}
+ISO-Code: ${curr_code}
+
+${currency_name_plural} können weltweit verwendet werden, sind jedoch im ursprünglichen Währungsraum am häufigsten vertreten.
+Das Netzwerk könnte als Ergänzung zur realen {curr_code}-Wirtschaft fungieren und damit eine Alternative bei Wirtschaftskrisen bieten.
