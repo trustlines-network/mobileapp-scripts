@@ -1,4 +1,4 @@
-import {TLNetwork} from "trustlines-clientlib";
+import {TLNetwork} from "@trustlines/trustlines-clientlib";
 import {config} from "../config";
 import fs from "fs";
 
@@ -59,13 +59,15 @@ export async function setTrustlines(networkAddress, tl1, tl2, given, received) {
             networkAddress,
             tl2.user.address,
             given,
-            received
+            received,
+            { transfer: 222, interestRateGiven: 10, interestRateReceived: 10 }
         ),
         tl2.trustline.prepareUpdate(
             networkAddress,
             tl1.user.address,
             received,
-            given
+            given,
+            { transfer: -222, interestRateGiven: 10, interestRateReceived: 10 }
         )
     ])
 

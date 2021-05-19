@@ -197,6 +197,27 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
+"@trustlines/trustlines-clientlib@0.15.1-0-dev.20210519T001007Z.c280779":
+  version "0.15.1-0-dev.20210519T001007Z.c280779"
+  resolved "https://registry.yarnpkg.com/@trustlines/trustlines-clientlib/-/trustlines-clientlib-0.15.1-0-dev.20210519T001007Z.c280779.tgz#b65e640b38065755cb5b602d462199bd24e9ec62"
+  integrity sha512-oFx5dvgsEJ+4WoJiolINxKCPWkQzpiU236Iy/PLZdxsFq5B/Stuzq4d1D5ph+HSin5TxfYBaOdWmbgJc72JF6A==
+  dependencies:
+    "@msgpack/msgpack" "^1.12.1"
+    "@trustlines/trustlines-contracts-abi" "^2.0.0"
+    bignumber.js "7.2.1"
+    ethereumjs-util "^5.2.0"
+    ethers "^4.0.23"
+    reconnecting-websocket "^4.1.10"
+    rxjs "^5.4.1"
+    simple-jsonrpc-js "0.0.10"
+    typedoc-plugin-markdown "^2.2.16"
+    ws "^6.2.1"
+
+"@trustlines/trustlines-contracts-abi@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@trustlines/trustlines-contracts-abi/-/trustlines-contracts-abi-2.0.0.tgz#64463b5ef30442e09cb669851ec3fdefc35ca8df"
+  integrity sha512-3T2jDeJF3ePMFWSbmaV8h0TZKBfbaUY9vQGk5OJybMW8RC8ts65WEFJoik/R+RWWZ932ZSJUxP3p2W8WWh+84Q==
+
 "@types/fs-extra@^8.0.1":
   version "8.0.1"
   resolved "https://registry.yarnpkg.com/@types/fs-extra/-/fs-extra-8.0.1.tgz#a2378d6e7e8afea1564e44aafa2e207dadf77686"
@@ -1731,27 +1752,6 @@ traverse@>=0.2.4:
   version "0.3.9"
   resolved "https://registry.yarnpkg.com/traverse/-/traverse-0.3.9.tgz#717b8f220cc0bb7b44e40514c22b2e8bbc70d8b9"
   integrity sha1-cXuPIgzAu3tE5AUUwisui7xw2Lk=
-
-trustlines-clientlib@^0.13.2-0:
-  version "0.13.2-0"
-  resolved "https://registry.yarnpkg.com/trustlines-clientlib/-/trustlines-clientlib-0.13.2-0.tgz#58423cf59cff0571cf5fec0673aa01be0f2dfd14"
-  integrity sha512-VnFw4Uub5gCaMQOSdNcz2nQsfkzuIJwA53pGMxGenKT+1lii1w/MueaQTjdA90dACwySjcZjaSuyBJvhr9ViSQ==
-  dependencies:
-    "@msgpack/msgpack" "^1.12.1"
-    bignumber.js "7.2.1"
-    ethereumjs-util "^5.2.0"
-    ethers "^4.0.23"
-    reconnecting-websocket "^4.1.10"
-    rxjs "^5.4.1"
-    simple-jsonrpc-js "0.0.10"
-    trustlines-contracts-abi dev
-    typedoc-plugin-markdown "^2.2.16"
-    ws "^6.2.1"
-
-trustlines-contracts-abi@dev:
-  version "1.0.1-dev2.g6d168f4"
-  resolved "https://registry.yarnpkg.com/trustlines-contracts-abi/-/trustlines-contracts-abi-1.0.1-dev2.g6d168f4.tgz#db2c28ef5884f6b948c6bc60166891a3a0aadd00"
-  integrity sha512-KVB8KxsfOSEcsQ78xgGZBggzRJeSuhF909r0wU80j75cIBOTNqjcNp+ZoQ142bUbE0L96hiw5eMurvxZAIfJ+g==
 
 tslib@1.10.0:
   version "1.10.0"

@@ -3,13 +3,13 @@
   "license": "GPL",
   "scripts": {},
   "dependencies": {
+    "@trustlines/trustlines-clientlib": "0.15.1-0-dev.20210519T001007Z.c280779",
     "cldr": "^5.7.0",
     "command-line-args": "^5.1.1",
     "command-line-usage": "^6.1.0",
     "esm": "^3.2.25",
     "firebase-admin": "^8.9.1",
     "node-fetch": "^2.6.0",
-    "trustlines-clientlib": "^0.13.2-0",
     "world-countries": "^4.0.0"
   }
 }
