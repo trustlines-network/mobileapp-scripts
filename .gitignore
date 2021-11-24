@@ -5,3 +5,5 @@
 /config.js
 /service-account-file.json
 /local/
+*.csv
+.DS_Store

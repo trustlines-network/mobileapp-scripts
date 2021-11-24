@@ -493,6 +493,11 @@ crypto-random-string@^2.0.0:
   resolved "https://registry.yarnpkg.com/crypto-random-string/-/crypto-random-string-2.0.0.tgz#ef2a7a966ec11083388369baa02ebead229b30d5"
   integrity sha512-v1plID3y9r/lPhviJ1wrXpLeyUIGAZ2SHNYTEapm7/8A9nLPoyvVp3RK/EPFqn5kEznyWgYZNsRtYYIWbuG8KA==
 
+csv-stringify@^6.0.4:
+  version "6.0.4"
+  resolved "https://registry.yarnpkg.com/csv-stringify/-/csv-stringify-6.0.4.tgz#8c1656fef2aa05c2ccf7401240d177944a08479e"
+  integrity sha512-Z3EbRQWwkOV3Qc2fQnJmfjrxRgAwH9AncnNK2jmtTvBvFjj/hESZUGm42YvTh9kMw2OOGPHQn5Yt0EbqoRtUVQ==
+
 date-and-time@^0.11.0:
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/date-and-time/-/date-and-time-0.11.1.tgz#0c3c8b21811562c53345b497c5e1c731b12e99eb"
