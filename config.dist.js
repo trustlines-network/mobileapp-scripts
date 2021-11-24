@@ -1,4 +1,4 @@
-import {WALLET_TYPE_IDENTITY} from "trustlines-clientlib/lib-esm/wallets/TLWallet";
+import {WALLET_TYPE_IDENTITY} from "@trustlines/trustlines-clientlib/lib-esm/wallets/TLWallet";
 
 export const config = {
     relayUrl: "http://localhost:5000/api/v1",
