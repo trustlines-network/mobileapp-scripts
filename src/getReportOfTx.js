@@ -62,8 +62,6 @@ const getUniqConnectionsOfAccount = async () => {
     const response = await fetch(`${config.relayUrl}/networks/${options.currencyNetwork}/users/${options.account}/mediation-fees`)
     const transfers = await response.json()
 
-    console.log(transfers.mediationFees)
-
     const addresses = Object.keys(transfers.mediationFees.reduce((prev, curr) => {
         prev[curr.from] = true
         prev[curr.to] = true
@@ -114,19 +112,26 @@ const getTransfersForConnections = async (members) => {
         return Promise.all(results.map(async (r) => {
             const result = await r.json()
 
-            // console.log('result', result)
-            return result.filter(event => event.direction === "sent").map(transfer => {
-                return {
-                    url: r.url,
-                    ...transfer,
-                    amount: parseFloat(calcValue(transfer.amount, 5))
-                }
-            })
+            let transfers = []
+            try {
+                transfers =  result.filter(event => event.direction === "sent").map(transfer => {
+                    return {
+                        url: r.url,
+                        ...transfer,
+                        amount: parseFloat(calcValue(transfer.amount, 5))
+                    }
+                })
+            } catch (e) {
+                console.log("filter fail", e, result, r)
+            }
+
+            return transfers
         }))
     })
         .then(results => {
             return results.flat()
         })
+
 }
 
 /**
@@ -141,8 +146,6 @@ async function init() {
     const memberBalances = await getBalanceForConnections(accountConnections)
     const anchorTransfers = await getTransfersForConnections([options.account])
     const memberTransfers = await getTransfersForConnections(accountConnections)
-    // console.log(memberBalances)
-    console.log(memberTransfers)
 
     stringify(anchorTransfers, {
         header: true
