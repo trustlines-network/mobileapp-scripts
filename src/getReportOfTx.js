@@ -118,7 +118,8 @@ const getTransfersForConnections = async (members) => {
                     return {
                         url: r.url,
                         ...transfer,
-                        amount: parseFloat(calcValue(transfer.amount, 5))
+                        amount: parseFloat(calcValue(transfer.amount, 5)),
+                        timestamp: new Date(transfer.timestamp*1000).toISOString()
                     }
                 })
             } catch (e) {
@@ -163,7 +164,9 @@ async function init() {
         });
     })
 
-    stringify(memberTransfers, {
+    const { compare } = Intl.Collator('en-US');
+
+    stringify(memberTransfers.sort((a, b) => compare(a.timestamp, b.timestamp)), {
         header: true
     }, function (err, output) {
         fs.writeFile(__dirname + '/memberTransfers.csv', output, () => {
